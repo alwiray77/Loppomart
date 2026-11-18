@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#087a4b">
+  <meta name="description" content="LoppoMart - Catatan keuangan dan operasional warung">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>LoppoMart</title>
+</head>
+<body>
+  <header class="topbar">
+    <button class="icon-btn" id="menuBtn" aria-label="Buka menu"><span class="hamburger">☰</span></button>
+    <div class="brand">
+      <img src="icon.svg" class="brand-logo" alt="LoppoMart">
+      <div><strong>LoppoMart</strong><small>Keuangan & Operasional Warung</small></div>
+    </div>
+    <button class="icon-btn notification" id="quickBackup" aria-label="Backup cepat">♧<i></i></button>
+  </header>
+
+  <main class="app-main">
+    <section class="view active" id="view-home">
+      <div class="hero-home">
+        <div class="hero-copy">
+          <span class="eyebrow">SALDO KAS AKHIR</span>
+          <div class="hero-date" id="homeDate">Hari ini</div>
+          <div class="hero-balance" id="homeBalance">Rp0</div>
+          <div class="hero-change" id="homeChange">Belum ada catatan hari ini</div>
+        </div>
+        <div class="store-art" aria-hidden="true">
+          <div class="store-awning"><i></i><i></i><i></i><i></i></div>
+          <div class="store-window"><b>L</b></div>
+          <div class="store-box box-one"></div><div class="store-box box-two"></div>
+          <div class="store-plant">✦</div>
+        </div>
+      </div>
+
+      <div class="quick-grid">
+        <button class="quick-card selected" data-go="entry">
+          <span class="quick-icon icon-entry"><svg viewBox="0 0 64 64"><rect x="13" y="9" width="38" height="47" rx="7"/><path d="M23 23l5 5 10-11M23 39l5 5 10-11M42 25h3M42 41h3"/></svg></span>
+          <b>Catat Harian</b><small>Kas masuk & keluar</small>
+        </button>
+        <button class="quick-card" data-go="shopping">
+          <span class="quick-icon icon-cart"><svg viewBox="0 0 64 64"><path d="M8 13h7l6 29h29l7-21H19"/><circle cx="27" cy="51" r="4"/><circle cx="47" cy="51" r="4"/><path d="M29 29h16M37 21v16"/></svg></span>
+          <b>Daftar Belanja</b><small>Barang kosong & harga</small>
+        </button>
+        <button class="quick-card" data-go="report">
+          <span class="quick-icon icon-report"><svg viewBox="0 0 64 64"><path d="M13 8h27l11 11v37H13zM40 8v12h11M22 43V32M32 43V25M42 43V19"/></svg></span>
+          <b>Laporan</b><small>Ringkasan usaha</small>
+        </button>
+        <button class="quick-card" data-go="more">
+          <span class="quick-icon icon-cloud"><svg viewBox="0 0 64 64"><path d="M17 45h32a9 9 0 0 0 1-18 17 17 0 0 0-32-4 11 11 0 0 0-1 22z"/><path d="M32 47V29m-8 8 8-8 8 8"/></svg></span>
+          <b>Backup</b><small>Amankan data</small>
+        </button>
+      </div>
+
+      <section class="summary-card">
+        <div class="summary-block">
+          <span class="mini-wallet">▣</span>
+          <div><small>Saldo kas hari ini</small><strong id="homeCash">Rp0</strong></div>
+        </div>
+        <button class="round-add" data-go="entry" aria-label="Tambah catatan">+</button>
+        <div class="summary-separator"></div>
+        <div class="summary-block capital-block">
+          <span class="capital-icon">▦</span>
+          <div><small>Estimasi belanja kosong</small><strong id="homeShopping">Rp0</strong></div>
+        </div>
+      </section>
+
+      <div class="info-strip"><span>ⓘ</span><p>Catat setiap transaksi setiap hari agar arus kas LoppoMart lebih mudah dipantau.</p></div>
+
+      <h2 class="section-title">Ringkasan bulan ini</h2>
+      <div class="metric-grid">
+        <article class="metric"><span class="metric-symbol green">↗</span><small>Total omzet</small><b id="homeRevenue">Rp0</b></article>
+        <article class="metric"><span class="metric-symbol yellow">▤</span><small>Belanja stok</small><b id="homeStock">Rp0</b></article>
+        <article class="metric"><span class="metric-symbol blue">◒</span><small>Estimasi laba operasional</small><b id="homeProfit">Rp0</b></article>
+        <article class="metric"><span class="metric-symbol orange">↘</span><small>Tagihan sales dibayar</small><b id="homeSupplier">Rp0</b></article>
+      </div>
+
+      <div class="promo-card">
+        <div class="promo-star">✦</div><div><b>Disiplin catat, usaha makin kuat!</b><small>Jangan campur uang pribadi dan uang usaha.</small></div>
+      </div>
+      <h2 class="section-title">Aktivitas terbaru</h2>
+      <div id="homeRecent" class="list-card empty-state">Belum ada catatan. Mulai catat transaksi LoppoMart hari ini.</div>
+    </section>
+
+    <section class="view" id="view-entry">
+      <div class="page-heading"><div><span class="eyebrow green-text">OPERASIONAL</span><h1>Catat Harian</h1><p>Rekam arus kas LoppoMart setiap hari.</p></div><span class="heading-icon">✎</span></div>
+      <form id="entryForm" class="form-card">
+        <label>Tanggal<input id="date" type="date" required></label>
+        <div class="form-grid">
+          <label>Saldo kas awal (Rp)<input id="opening" type="number" min="0" step="1" inputmode="numeric" value="0"></label>
+          <label>Omzet penjualan (Rp)<input id="revenue" type="number" min="0" step="1" inputmode="numeric" value="0" required></label>
+        </div>
+        <div class="helper-box"><b>Catatan penting</b><br>HPP adalah modal barang yang benar-benar terjual. Belanja stok adalah uang yang dibayarkan untuk membeli stok. Keduanya berbeda.</div>
+        <h3>Modal & pembelian</h3>
+        <div class="form-grid">
+          <label>HPP barang terjual (Rp)<input id="cogs" type="number" min="0" step="1" inputmode="numeric" value="0"></label>
+          <label>Belanja stok dibayar (Rp)<input id="stock" type="number" min="0" step="1" inputmode="numeric" value="0"></label>
+        </div>
+        <label>Bayar tagihan sales / utang stok sebelumnya (Rp)<input id="supplier" type="number" min="0" step="1" inputmode="numeric" value="0"></label>
+        <h3>Pengeluaran lain</h3>
+        <div class="form-grid">
+          <label>Gaji karyawan (Rp)<input id="salary" type="number" min="0" step="1" inputmode="numeric" value="60000"></label>
+          <label>Operasional lain (Rp)<input id="operating" type="number" min="0" step="1" inputmode="numeric" value="0"></label>
+          <label>Pengambilan pribadi (Rp)<input id="personal" type="number" min="0" step="1" inputmode="numeric" value="0"></label>
+          <label>Bayar cicilan (Rp)<input id="installment" type="number" min="0" step="1" inputmode="numeric" value="0"></label>
+        </div>
+        <label>Catatan (opsional)<textarea id="note" rows="3" placeholder="Contoh: tagihan Sayap Mas, stok telur, uang nombok..."></textarea></label>
+        <div class="calculation-box">
+          <div><span>Estimasi laba kotor</span><b id="gross">Rp0</b></div>
+          <div><span>Estimasi laba operasional</span><b id="profit">Rp0</b></div>
+          <div><span>Perubahan kas hari ini</span><b id="change">Rp0</b></div>
+          <div class="calculation-total"><span>Saldo kas akhir</span><b id="cashEnd">Rp0</b></div>
+        </div>
+        <p class="fine-print">Laba operasional = omzet − HPP − gaji − operasional. Cicilan pokok mengurangi kas, bukan otomatis biaya laba.</p>
+        <div class="button-row"><button class="btn-primary" type="submit">Simpan catatan</button><button class="btn-light" type="button" id="clearEntry">Kosongkan</button></div>
+        <p id="entryStatus" class="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="view" id="view-shopping">
+      <div class="page-heading"><div><span class="eyebrow green-text">PERSEDIAAN</span><h1>Daftar Belanja</h1><p>Catat barang kosong sebelum belanja ke sales.</p></div><span class="heading-icon">🛒</span></div>
+      <div class="shopping-budget"><small>ESTIMASI TOTAL BELANJA BELUM DIBELI</small><strong id="shoppingTotal">Rp0</strong><span id="shoppingCount">0 barang belum dibeli</span></div>
+      <form id="itemForm" class="form-card compact-form">
+        <h3>Tambah barang</h3>
+        <label>Nama barang<input id="itemName" type="text" placeholder="Contoh: Minyak goreng 1 liter" required></label>
+        <div class="form-grid"><label>Jumlah<input id="itemQty" type="number" min="1" step="1" inputmode="numeric" value="1" required></label><label>Harga satuan (Rp)<input id="itemPrice" type="number" min="0" step="1" inputmode="numeric" value="0" required></label></div>
+        <label>Jadwal / sales<select id="itemSupplier"><option>Sabtu - Sayap Mas</option><option>Senin - Sayap Mas</option><option>Sales lain</option><option>Belanja sendiri</option></select></label>
+        <div class="subtotal-preview">Subtotal barang: <b id="itemSubtotal">Rp0</b></div>
+        <button class="btn-primary full-width" type="submit">+ Simpan ke daftar belanja</button>
+        <p id="itemStatus" class="status" aria-live="polite"></p>
+      </form>
+      <div class="filter-bar"><label>Filter<select id="shoppingFilter"><option value="Semua">Semua barang</option><option>Sabtu - Sayap Mas</option><option>Senin - Sayap Mas</option><option>Sales lain</option><option>Belanja sendiri</option><option value="Sudah dibeli">Sudah dibeli</option></select></label><span id="shoppingTotalSmall"></span></div>
+      <div id="shoppingList" class="stack-list empty-state">Belum ada barang di daftar.</div>
+    </section>
+
+    <section class="view" id="view-report">
+      <div class="page-heading"><div><span class="eyebrow green-text">ANALISIS USAHA</span><h1>Laporan</h1><p>Pantau perkembangan keuangan bulanan.</p></div><span class="heading-icon">▥</span></div>
+      <div class="form-card report-filter"><label>Pilih bulan<input type="month" id="month"></label></div>
+      <div class="report-grid">
+        <article class="report-tile"><small>Total omzet</small><b id="rRevenue">Rp0</b></article>
+        <article class="report-tile"><small>Total HPP</small><b id="rCogs">Rp0</b></article>
+        <article class="report-tile"><small>Estimasi laba operasional</small><b id="rProfit">Rp0</b></article>
+        <article class="report-tile"><small>Belanja stok dibayar</small><b id="rStock">Rp0</b></article>
+        <article class="report-tile"><small>Bayar tagihan sales</small><b id="rSupplier">Rp0</b></article>
+        <article class="report-tile"><small>Pengambilan pribadi</small><b id="rPersonal">Rp0</b></article>
+      </div>
+      <div class="section-row"><h2 class="section-title">Riwayat harian</h2><button class="text-button" id="exportCsv">Unduh CSV</button></div>
+      <div id="history" class="stack-list empty-state">Belum ada catatan untuk bulan ini.</div>
+    </section>
+
+    <section class="view" id="view-more">
+      <div class="page-heading"><div><span class="eyebrow green-text">PENGATURAN</span><h1>Lainnya</h1><p>Backup, pemulihan, dan informasi aplikasi.</p></div><span class="heading-icon">⚙</span></div>
+      <div class="backup-hero"><div class="backup-cloud">☁</div><div><b>Amankan data LoppoMart</b><small>Unduh backup secara berkala agar catatan tidak hilang.</small></div></div>
+      <div class="form-card">
+        <h3>Backup & pemulihan</h3>
+        <p class="muted">Data disimpan di browser HP ini. Belum ada sinkronisasi cloud otomatis.</p>
+        <button id="export" class="btn-primary full-width">Unduh backup (.json)</button>
+        <label class="file-picker">Pulihkan backup (.json)<input id="import" type="file" accept=".json,application/json"></label>
+        <p id="backupStatus" class="status" aria-live="polite"></p>
+        <div class="helper-box">Backup mencakup catatan keuangan harian dan daftar barang kosong. Jangan hapus data browser sebelum membuat backup.</div>
+      </div>
+      <div class="form-card about-card"><h3>Tentang LoppoMart</h3><div class="about-row"><img src="icon.svg" alt=""><div><b>LoppoMart 3.0</b><small>Keuangan & Operasional Warung</small></div></div><p class="muted">Dirancang untuk membantu mencatat arus kas, memantau belanja stok, dan mengevaluasi usaha.</p><div class="about-pills"><span>Offline siap pakai</span><span>Data lokal</span><span>Backup manual</span></div></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" id="bottomNav" aria-label="Navigasi utama">
+    <button class="nav-item active" data-view="home"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z"/></svg></span><small>Home</small></button>
+    <button class="nav-item" data-view="entry"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M6 3h12a2 2 0 0 1 2 2v16H4V5a2 2 0 0 1 2-2zM8 8h8M8 12h8M8 16h5"/></svg></span><small>Catat</small></button>
+    <button class="nav-item" data-view="shopping"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.5h11L21 8H6M9 20h.01M17 20h.01"/></svg></span><small>Belanja</small></button>
+    <button class="nav-item" data-view="report"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M4 20V4h16v16zM7 16v-4M12 16V8M17 16v-6"/></svg></span><small>Laporan</small></button>
+    <button class="nav-item" data-view="more"><span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></svg></span><small>Lainnya</small></button>
+  </nav>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>

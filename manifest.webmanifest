@@ -1,0 +1,18 @@
+{
+  "name": "LoppoMart - Keuangan & Operasional",
+  "short_name": "LoppoMart",
+  "description": "Catatan keuangan dan operasional warung",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f8f5",
+  "theme_color": "#087a4b",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
